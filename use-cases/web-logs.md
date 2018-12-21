@@ -9,7 +9,7 @@ Using the fields as represented here is not expected to conflict with ECS, but m
 
 | Field  | Description  | Level  | Type  | Example  |
 |---|---|---|---|---|
-| [@timestamp](../README.md#@timestamp)  | Time at which the response was sent, and the web server log created. | core | date | `2016-05-23T08:05:34.853Z` |
+| <a name="@timestamp"></a>*@timestamp* | *Time at which the response was sent, and the web server log created.<br/>* | (use case) | date | `2016-05-23T08:05:34.853Z` |
 | <a name="http.&ast;"></a>*http.&ast;* | *Fields related to HTTP requests and responses.<br/>* |  |  |  |
 | [http.request.method](../README.md#http.request.method)  | Http request method. | extended | keyword | `GET, POST, PUT` |
 | [http.request.referrer](../README.md#http.request.referrer)  | Referrer for this HTTP request. | extended | keyword | `https://blog.example.com/` |

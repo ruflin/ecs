@@ -36,43 +36,52 @@ def clean_namespace_fields(fields):
 
         prefix = ""
         # Prefix if not base namespace
-        if namespace["name"] != "base":
-            prefix = namespace["name"]
+        #print namespace
 
-        clean_fields(namespace["fields"], prefix, namespace["group"])
+        if "type" not in namespace:
+            namespace["type"] = "keyword"
+
+        if namespace["type"] == "group":
+            prefix = namespace["name"]
+            clean_fields(namespace["fields"], prefix, namespace["group"])
+        else:
+            # TODO: Clean field
+            clean_field(namespace, prefix, namespace["group"])
 
 
 def clean_fields(fields, prefix, group):
     for field in fields:
-        clean_string_field(field, "description")
-        clean_string_field(field, "footnote")
-        clean_string_field(field, "example")
-        clean_string_field(field, "type")
+        clean_field(field, prefix, group)
 
-        # Add prefix if needed
-        if prefix != "":
-            field["name"] = prefix + "." + field["name"]
+def clean_field(field, prefix, group):
+    clean_string_field(field, "description")
+    clean_string_field(field, "footnote")
+    clean_string_field(field, "example")
+    clean_string_field(field, "type")
 
-        if 'level' not in field.keys():
-            field["level"] = '(use case)'
+    # Add prefix if needed
+    if prefix != "":
+        field["name"] = prefix + "." + field["name"]
 
-        if 'group' not in field.keys():
-            # If no group set, set parent group
-            field["group"] = group
+    if 'level' not in field.keys():
+        field["level"] = '(use case)'
 
-        if "multi_fields" in field:
-            for f in field["multi_fields"]:
-                clean_string_field(f, "description")
-                clean_string_field(f, "example")
-                clean_string_field(f, "type")
+    if 'group' not in field.keys():
+        # If no group set, set parent group
+        field["group"] = group
 
-                # multi fields always have a prefix
-                f["name"] = field["name"] + "." + f["name"]
+    if "multi_fields" in field:
+        for f in field["multi_fields"]:
+            clean_string_field(f, "description")
+            clean_string_field(f, "example")
+            clean_string_field(f, "type")
 
-                if 'group' not in f.keys():
-                    # If no group set, set parent group
-                    f["group"] = group
+            # multi fields always have a prefix
+            f["name"] = field["name"] + "." + f["name"]
 
+            if 'group' not in f.keys():
+                # If no group set, set parent group
+                f["group"] = group
 
 def clean_string_field(field, key):
     """Cleans a string field and creates an empty string for the field in case it does not exist
@@ -91,6 +100,8 @@ def get_markdown_row(field, link, multi_field):
     """Creates a markdown table for the given fields
     """
 
+    if "description" not in field:
+        field["description"] = ""
     # Replace newlines with HTML representation as otherwise newlines don't work in Markdown
     description = field["description"].replace("\n", "<br/>")
 
@@ -106,9 +117,12 @@ def get_markdown_row(field, link, multi_field):
         description = "*" + description + "*"
 
     example = ""
-    if field["example"] != "":
+    if "example" in field and field["example"] != "":
         # Add ticks around examples to not break table
         example = "`{}`".format(field["example"])
+
+    if "type" not in field:
+        field["type"] = ""
 
     # If link is true, it link to the anchor is provided. This is used for the use-cases
     if link and ecs:

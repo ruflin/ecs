@@ -21,7 +21,7 @@
       ],
       "properties": {
         "@timestamp": {
-          "type": "date"
+          "properties": {}
         },
         "agent": {
           "properties": {
@@ -464,7 +464,7 @@
           }
         },
         "labels": {
-          "type": "object"
+          "properties": {}
         },
         "log": {
           "properties": {
@@ -481,8 +481,7 @@
           }
         },
         "message": {
-          "norms": false,
-          "type": "text"
+          "properties": {}
         },
         "network": {
           "properties": {
@@ -732,8 +731,7 @@
           }
         },
         "tags": {
-          "ignore_above": 1024,
-          "type": "keyword"
+          "properties": {}
         },
         "url": {
           "properties": {

@@ -47,7 +47,6 @@ fully up to date.
 # <a name="fields"></a>Fields
 
 ECS defines these fields.
- * [Base fields](#base)
  * [Agent fields](#agent)
  * [Client fields](#client)
  * [Cloud fields](#cloud)
@@ -74,19 +73,6 @@ ECS defines these fields.
  * [URL fields](#url)
  * [User fields](#user)
  * [User agent fields](#user_agent)
-
-## <a name="base"></a> Base fields
-
-The base set contains all fields which are on the top level. These fields are common across all types of events.
-
-
-| Field  | Description  | Level  | Type  | Example  |
-|---|---|---|---|---|
-| <a name="@timestamp"></a>@timestamp | Date/time when the event originated.<br/>For log events this is the date/time when the event was generated, and not when it was read.<br/>Required field for all events. | core | date | `2016-05-23T08:05:34.853Z` |
-| <a name="tags"></a>tags | List of keywords used to tag each event. | core | keyword | `["production", "env2"]` |
-| <a name="labels"></a>labels | Key/value pairs.<br/>Can be used to add meta information to events. Should not contain nested objects. All values are stored as keyword.<br/>Example: `docker` and `k8s` labels. | core | object | `{'application': 'foo-bar', 'env': 'production'}` |
-| <a name="message"></a>message | For log events the message field contains the log message.<br/>In other use cases the message field can be used to concatenate different values which are then freely searchable. If multiple messages exist, they can be combined into one message. | core | text | `Hello World` |
-
 
 ## <a name="agent"></a> Agent fields
 

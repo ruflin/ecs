@@ -22,7 +22,7 @@ def create_csv(fields, file):
         schema_writer.writerow(["Field", "Type", "Level", "Example"])
 
         for namespace in fields:
-            if len(namespace["fields"]) == 0:
+            if namespace["type"] != "group" or len(namespace["fields"]) == 0:
                 continue
 
             # Sort fields for easier readability
@@ -40,7 +40,7 @@ def create_markdown_document(fields):
 
     links = ""
     for namespace in fields:
-        if len(namespace["fields"]) == 0:
+        if namespace["type"] != "group" or len(namespace["fields"]) == 0:
             continue
         # Links to each namespace / top level object
         links += " * [{} fields](#{})\n".format(namespace["title"], namespace["name"])
@@ -51,20 +51,24 @@ def create_markdown_document(fields):
 
 def filtered_fields(fields, groups):
     new_fields = copy.deepcopy(fields)
-    for f in new_fields:
-        n = 0
-        for field in list(f["fields"]):
-            if field["group"] not in groups:
-                del f["fields"][n]
-                continue
-            n = n + 1
+    #for f in new_fields:
+    #    n = 0
+    #    for field in list(f["fields"]):
+    #        if field["group"] not in groups:
+    #            del f["fields"][n]
+    #            continue
+    #        n = n + 1
 
     return new_fields
 
 
 def check_fields(fields):
     for f in fields:
-        for field in list(f["fields"]):
+        if f["type"] == "group":
+            for field in list(f["fields"]):
+                if field["level"] not in ["core", "extended"]:
+                    raise Exception('Field {} does not have an allowed level'.format(field["name"]))
+        else:
             if field["level"] not in ["core", "extended"]:
                 raise Exception('Field {} does not have an allowed level'.format(field["name"]))
 

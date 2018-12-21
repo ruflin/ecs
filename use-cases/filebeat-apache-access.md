@@ -7,23 +7,23 @@ ECS fields used in Filebeat for the apache module.
 
 | Field  | Description  | Level  | Type  | Example  |
 |---|---|---|---|---|
-| <a name="id"></a>*id* | *Unique id to describe the event.* | (use case) | keyword | `8a4f500d` |
-| [@timestamp](../README.md#@timestamp)  | Timestamp of the log line after processing. | core | date | `2016-05-23T08:05:34.853Z` |
-| [message](../README.md#message)  | Log message of the event | core | text | `Hello World` |
-| [event.module](../README.md#event.module)  | Currently fileset.module | core | keyword | `apache` |
-| [event.dataset](../README.md#event.dataset)  | Currenly fileset.name | core | keyword | `access` |
-| [source.ip](../README.md#source.ip)  | Source ip of the request. Currently apache.access.remote_ip | core | ip | `192.168.1.1` |
-| [user.name](../README.md#user.name)  | User name in the request. Currently apache.access.user_name | core | keyword | `ruflin` |
-| <a name="http.method"></a>*http.method* | *Http method, currently apache.access.method* | (use case) | keyword | `GET` |
-| <a name="http.url"></a>*http.url* | *Http url, currently apache.access.url* | (use case) | keyword | `http://elastic.co/` |
-| [http.version](../README.md#http.version)  | Http version, currently apache.access.http_version | extended | keyword | `1.1` |
-| <a name="http.response.code"></a>*http.response.code* | *Http response code, currently apache.access.response_code* | (use case) | keyword | `404` |
-| <a name="http.response.body_sent.bytes"></a>*http.response.body_sent.bytes* | *Http response body bytes sent, currently apache.access.body_sent.bytes* | (use case) | long | `117` |
-| <a name="http.referer"></a>*http.referer* | *Http referrer code, currently apache.access.referrer<br/>NOTE: In the RFC its misspell as referer and has become accepted standard* | (use case) | keyword | `http://elastic.co/` |
-| <a name="user_agent.&ast;"></a>*user_agent.&ast;* | *User agent fields as in schema. Currently under apache.access.user_agent.*<br/>* |  |  |  |
-| [user_agent.original](../README.md#user_agent.original)  | Original user agent. Currently apache.access.agent | extended | keyword | `http://elastic.co/` |
-| <a name="geoip.&ast;"></a>*geoip.&ast;* | *User agent fields as in schema. Currently under apache.access.geoip.*<br/>These are extracted from source.ip<br/>Should they be under source.geoip?<br/>* |  |  |  |
-| <a name="geoip...."></a>*geoip....* | *All geoip fields.* | (use case) | keyword |  |
+| <a name="id"></a>*id* | *Unique id to describe the event.<br/>* | (use case) | keyword | `8a4f500d` |
+| <a name="@timestamp"></a>*@timestamp* | *Timestamp of the log line after processing.<br/>* | (use case) | date | `2016-05-23T08:05:34.853Z` |
+| <a name="message"></a>*message* | *Log message of the event<br/>* | (use case) | date | `Hello World` |
+| <a name="module"></a>*module* | *Currently fileset.module<br/>* | (use case) | keyword | `apache` |
+| <a name="dataset"></a>*dataset* | *Currenly fileset.name<br/>* | (use case) | keyword | `access` |
+| <a name="ip"></a>*ip* | *Source ip of the request. Currently apache.access.remote_ip<br/>* | (use case) | ip | `192.168.1.1` |
+| <a name="name"></a>*name* | *User name in the request. Currently apache.access.user_name<br/>* | (use case) | keyword | `ruflin` |
+| <a name="method"></a>*method* | *Http method, currently apache.access.method<br/>* | (use case) | keyword | `GET` |
+| <a name="url"></a>*url* | *Http url, currently apache.access.url<br/>* | (use case) | keyword | `http://elastic.co/` |
+| <a name="version"></a>*version* | *Http version, currently apache.access.http_version<br/>* | (use case) | keyword | `1.1` |
+| <a name="response.code"></a>*response.code* | *Http response code, currently apache.access.response_code<br/>* | (use case) | keyword | `404` |
+| <a name="response.body_sent.bytes"></a>*response.body_sent.bytes* | *Http response body bytes sent, currently apache.access.body_sent.bytes<br/>* | (use case) | long | `117` |
+| <a name="referer"></a>*referer* | *Http referrer code, currently apache.access.referrer<br/>NOTE: In the RFC its misspell as referer and has become accepted standard<br/>* | (use case) | keyword | `http://elastic.co/` |
+| <a name="user_agent.&ast;"></a>*user_agent.&ast;* | *User agent fields as in schema. Currently under apache.access.user_agent.** |  |  |  |
+| <a name="original"></a>*original* | *Original user agent. Currently apache.access.agent<br/>* | (use case) | keyword | `http://elastic.co/` |
+| <a name="geoip.&ast;"></a>*geoip.&ast;* | *User agent fields as in schema. Currently under apache.access.geoip.*<br/>These are extracted from source.ip<br/>Should they be under source.geoip?* |  |  |  |
+| <a name="..."></a>*...* | *All geoip fields.<br/>* | (use case) | keyword |  |
 
 
 

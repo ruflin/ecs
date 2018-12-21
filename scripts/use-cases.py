@@ -49,7 +49,7 @@ def write_stdout():
                     section_fields["level"] = flat_schema[section_fields["name"]]["level"]
                     if section_fields["description"] == "":
                         section_fields["description"] = flat_schema[section_fields["name"]]["description"]
-                    if section_fields["example"] == "":
+                    if "example" in section_fields and section_fields["example"] == "":
                         section_fields["example"] = flat_schema[section_fields["name"]]["example"]
                 else:
                     section_fields["ecs"] = False
@@ -74,7 +74,7 @@ def create_flat_schema(schema):
     fields = {}
 
     for namespace in schema:
-        if len(namespace["fields"]) == 0:
+        if namespace["type"] != "group" or len(namespace["fields"]) == 0:
             continue
 
         for f in namespace["fields"]:
